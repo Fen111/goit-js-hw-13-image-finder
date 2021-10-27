@@ -21,13 +21,16 @@
     "url": "https://github.com/Fen111/goit-js-hw-13-image-finder/issues"
   },
   "devDependencies": {
+    "@pnotify/core": "^5.2.0",
     "parcel-bundler": "^1.12.5",
     "parcel-plugin-handlebars-precompile": "^1.0.2",
     "parcel-plugin-nuke-dist": "^1.0.1",
+    "pnotify": "^5.2.0",
     "posthtml-include": "^1.6.2",
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "@pnotify/desktop": "^5.2.0",
     "axios": "^0.23.0",
     "gh-pages": "^3.2.3",
     "handlebars": "^4.7.7",

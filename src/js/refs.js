@@ -1,7 +1,7 @@
 export default {
   form: document.getElementById('search-form'),
-  input: document.getElementById('form-input'),
   gallery: document.querySelector('.gallery'),
-  btnSearch: document.getElementById('button-search'),
-  btnLoadMore: document.getElementById('my-element-selector'),
+  element: document.getElementById('.my-element-selector'),
+  btnLoadMore: document.getElementById('button-load-more'),
+  btnClear: document.getElementById('button-clear'),
 };
