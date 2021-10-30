@@ -13,24 +13,25 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="./style/styles.css" />
   </head>
-  <body>
-    <div class="container">
-      <form class="search-form" id="search-form">
-        <input
-          id="form-input"
-          type="text"
-          name="query"
-          autocomplete="off"
-          placeholder="Search images..."
-        />
-        <button id="button-search" type="submit">Search</button>
-        <button id="button-load-more" type="button" disabled>Load more</button>
-        <button id="button-clear" type="button">Clear</button>
-        <ul class="gallery">
-          <!-- Список <li> с карточками изображений -->
-        </ul>
-      </form>
-    </div>
+  <body class="container">
+    <form class="search-form" id="search-form">
+      <input
+        id="form-input"
+        type="text"
+        name="query"
+        autocomplete="off"
+        placeholder="Search images..."
+      />
+      <button id="button-search" type="submit">Search</button>
+
+      <button id="button-clear" type="button">Clear</button>
+      <ul class="gallery">
+        <!-- Список <li> с карточками изображений -->
+      </ul>
+
+      <button id="button-load-more" type="button" hidden>Load more</button>
+    </form>
+
     <script src="./index.js" type="module"></script>
   </body>
 </html>

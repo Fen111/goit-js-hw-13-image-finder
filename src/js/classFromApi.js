@@ -10,18 +10,18 @@ export default class newsApiService {
     this.page = 1;
   }
   async fetchImage() {
-    console.log(this);
     const BASE_URL = `https://pixabay.com/api/?image_type=photo&orientation=horizontal`;
-    // let category = `${this.searchQuery}`;
     let per_page = 12;
-
     const apiKey = `23914400-19c57926caa45a402450638cc`;
     let url =
       BASE_URL + `&q=${this.searchQuery}&page=${this.page}&per_page=${per_page}&key=${apiKey}`;
 
     const res = await axios.get(url);
-    const data = await res.data;
-    const galleryImg = await data.hits;
+    const data = res.data;
+    console.log(data);
+
+    const galleryImg = data.hits;
+
     this.incrementPage();
 
     if (galleryImg.length === 0) {

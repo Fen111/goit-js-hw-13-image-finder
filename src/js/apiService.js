@@ -1,13 +1,14 @@
 import '@pnotify/core/dist/BrightTheme.css';
-import { alert, notice, info, success, error, defaultModules } from '@pnotify/core';
+import { notice, defaultModules } from '@pnotify/core';
 import * as PNotifyDesktop from '@pnotify/desktop';
 import '@pnotify/core/dist/PNotify.css';
 
 import refs from './refs';
 import listImage from '../templates/card-img.hbs';
+
 import NewsApiService from './classFromApi';
 
-const { form, gallery, btnLoadMore, btnClear, element } = refs;
+const { form, gallery, btnLoadMore, btnClear } = refs;
 const newsApiService = new NewsApiService();
 
 form.addEventListener('submit', renderOnClick);
@@ -17,7 +18,7 @@ btnLoadMore.addEventListener('click', onLoadMore);
 async function renderOnClick(e) {
   e.preventDefault();
   clearOnClick();
-  btnLoadMore.disabled = false;
+  btnLoadMore.hidden = false;
 
   newsApiService.query = e.currentTarget.elements.query.value;
   newsApiService.resetPage();
@@ -31,9 +32,7 @@ async function renderOnClick(e) {
       return myNotice;
     }
 
-    const image = newsApiService.fetchImage();
-
-    return image.then(renderCardImage);
+    return newsApiService.fetchImage().then(renderCardImage);
   } catch (err) {
     return catchError;
   }
@@ -41,21 +40,21 @@ async function renderOnClick(e) {
 
 function renderCardImage(image) {
   let markup = listImage(image);
-  gallery.insertAdjacentHTML('afterbegin', markup);
+  gallery.insertAdjacentHTML('beforeend', markup);
 }
 
 function onLoadMore() {
   newsApiService.fetchImage().then(renderCardImage);
+  setTimeout(() => {
+    btnLoadMore.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, 500);
 }
-
-form.scrollIntoView({
-  behavior: 'smooth',
-  block: 'end',
-});
 
 function clearOnClick() {
   gallery.innerHTML = '';
-  btnLoadMore.disabled = true;
 }
 
 function catchError() {
