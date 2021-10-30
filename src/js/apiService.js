@@ -17,8 +17,6 @@ btnLoadMore.addEventListener('click', onLoadMore);
 
 async function renderOnClick(e) {
   e.preventDefault();
-  clearOnClick();
-  btnLoadMore.hidden = false;
 
   newsApiService.query = e.currentTarget.elements.query.value;
   newsApiService.resetPage();
@@ -29,10 +27,12 @@ async function renderOnClick(e) {
         text: 'Enter your search term!',
         modules: new Map([...defaultModules, [PNotifyDesktop, {}]]),
       });
-      return myNotice;
-    }
 
-    return newsApiService.fetchImage().then(renderCardImage);
+      return myNotice;
+    } else {
+      clearOnClick();
+      return newsApiService.fetchImage().then(renderCardImage);
+    }
   } catch (err) {
     return catchError;
   }
@@ -41,6 +41,7 @@ async function renderOnClick(e) {
 function renderCardImage(image) {
   let markup = listImage(image);
   gallery.insertAdjacentHTML('beforeend', markup);
+  btnHidden(false);
 }
 
 function onLoadMore() {
@@ -55,6 +56,12 @@ function onLoadMore() {
 
 function clearOnClick() {
   gallery.innerHTML = '';
+  btnHidden(true);
+  form.elements.query.value = '';
+}
+
+function btnHidden(value) {
+  btnLoadMore.hidden = value;
 }
 
 function catchError() {
